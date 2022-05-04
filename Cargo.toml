@@ -1,0 +1,13 @@
+[package]
+name = "unaf-uis"
+description = "U.N.A.F.; [U]SAGI.[N]ETWORK [A]pplication [F]ramework :: [U]ser [I]nterface[s] module"
+version = "0.0.0"
+edition = "2021"
+authors = ["USAGI.NETWORK / Usagi Ito <the@usagi.network>"]
+license = "MIT"
+repository = "https://github.com/usagi/unaf-uis"
+categories = ["web-programming::http-client", "gui"]
+keywords = ["unaf", "client", "app-framework", "usagi-network", "web"]
+documentation = "https://docs.rs/unaf-uis/"
+
+[dependencies]

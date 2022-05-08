@@ -9,5 +9,23 @@ repository = "https://github.com/usagi/unaf-uis"
 categories = ["web-programming::http-client", "gui"]
 keywords = ["unaf", "client", "app-framework", "usagi-network", "web"]
 documentation = "https://docs.rs/unaf-uis/"
+build = ".build/build.rs"
+
+[features]
+default = []
+deprecated = []
+trial1 = []
+
+[lib]
+path = ".build/lib.rs"
 
 [dependencies]
+glob = "0.3.0"
+once_cell = "1.10.0"
+build-pretty = "1.0.0"
+const_format = "0.2.23"
+
+[build-dependencies]
+glob = "0.3.0"
+build-pretty = "1.0.0"
+const_format = "0.2.23"

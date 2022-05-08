@@ -1,0 +1,31 @@
+{
+ "name": "src",
+ "version": "0.0.0",
+ "main": "main.js",
+ "license": "MIT",
+ "private": true,
+ "scripts": {
+  "clean": "run-s clean-debug",
+  "clean-debug": "rimraf pub.debug/*",
+  "clean-release": "rimraf pub.release/*",
+  "build": "run-s build-debug",
+  "build-debug": "cpx src/* pub.debug/",
+  "build-release": "cpx src/* pub.debug/",
+  "rebuild": "run-s clean build",
+  "rebuild-debug": "run-s clean-debug biuld-debug",
+  "rebuild-release": "run-s clean-release build-release",
+  "test": "echo unimplemented!",
+  "test-debug": "echo unimplemented!",
+  "test-release": "echo unimplemented!"
+ },
+ "devDependencies": {
+  "cpx": "^1.5.0",
+  "download-cli": "^1.1.1",
+  "gulp": "^4.0.2",
+  "npm-run-all": "^4.1.5",
+  "postcss": "^8.4.13",
+  "rimraf": "^3.0.2",
+  "snowpack": "^3.8.8",
+  "symian": "^1.0.2"
+ }
+}

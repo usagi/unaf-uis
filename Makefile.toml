@@ -1,0 +1,32 @@
+[tasks.build]
+alias = "build-debug"
+
+[tasks.build-debug]
+
+[tasks.build-release]
+
+[tasks.run]
+alias = "run-debug"
+
+[tasks.run-debug]
+
+[tasks.run-release]
+
+[tasks.run-debug-without-build]
+
+[tasks.run-release-without-build]
+
+# -----------------------------------------------------
+# ↓ここから uis 専用コマンド; uis の外では使えないよ。
+# -----------------------------------------------------
+[tasks.build-debug-pub]
+command = "echo"
+args = ["this is build-debug-pub"]
+
+[tasks.build-release-pub]
+command = "echo"
+args = ["this is build-release-pub"]
+
+[tasks.build-deprecated-pub]
+command = "echo"
+args = ["this is build-deprecated-pub"]

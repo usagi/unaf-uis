@@ -1,0 +1,3 @@
+mount = "#example-mount-point"
+initializer = "app.uis.mount(this)"
+finalizer = "app.uis.tmp(this).clean()"

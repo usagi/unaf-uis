@@ -1,3 +1,45 @@
-mount = "#example-mount-point"
-initializer = "app.uis.mount(this)"
-finalizer = "app.uis.tmp(this).clean()"
+## この設定機能は unaf-uis の 0.0.0-alpha 開発中の仕様のためまだ完全に決まった仕様ではありません。
+## 便利になる設定や挙動については unaf-uis の author へ投げるといいです。
+
+# 設定を特別に用意したいファイル、またはファイル群を一括設定できる正規表現パターンを [ ] で記述します。
+# 「デフォルト」設定で構わないファイルはわざわざ設定を用意する必要はありません。
+# 何がデフォルトかは項目ごとに説明と合わせて書きます。
+["main.html"]
+
+# auto-mount
+# true にしておくとこのUIが読み込まれた時に全自動でファイル形式に対応した読み込まれ方をします。
+#   .html => mount で設定する対象CSSセレクターへ読み込まれます。
+#   .css  => なるはやで適用されます。
+#   .js   => なるはやで eval されます。
+#   .*    => その他のファイルは何もおこりませんん。 .png など。
+# false はjsを使って任意のタイミングで読み込みを制御したりしたい場合に使います。
+auto-mount = true # default: true
+
+# mount-target
+# ファイル形式に応じたデフォルトのマウント先を設定できます。 { "CSSセレクタ"="UIファイル名", ... }
+# auto-load = false の場合でも uis-API で app.uis.NewExampleUI1.mount() を読んだ時のデフォルトの
+# マウント先になります。
+#   .html => CSS セレクターに応じて読み込み。対象が複数ある場合は全ての対象へ読み込まれます。
+#   .*    => その他のファイルは特に何も起こりません。
+mount-target = "#main" # default: 設定なし
+
+# マウントする方法をお好みで選べます。未設定のデフォルトは "append" 扱いになります。
+#  append    => target の子要素としてこのUIをぶちこみます。(※他に子要素がある場合は追加で並ぶ事になります。)
+#  truncate  => target の子要素をすべて削除してからこのUIをぶちこみます。targetの子要素をこのUIだけで独占したい場合に使います。
+#  transmute => target それ自体をこのUIに挿げ替えます。(※仮想的なページ切り替えとか！)
+mode = "append" # default: append
+
+# server-resource
+# true にしておくと GET "/resource/NewExampleUI1/image/hoge.png" のようなURLでアクセス可能なように
+# サーバーがよしなに準備してくれます。通常、 img タグで読み込ませたい画像などは true にします。
+# false にするとサーバーからのダウンロードはできなくなります。URLでアクセスされたくないファイルというよりは、
+# クライアント側に組み込んでしまうのでサーバー側にはホストする必要の無いファイルに使います。
+# （※オフライン機能など諸事情により server/client 両方で true という事も可能なように作ってあります。）
+server-resource = true # default: true
+
+# client-resource
+# true にすると、必要になったときにサーバーとの通信なしで、cli-API を
+# app.uis.resource("/resource/NewExampleUI1/image/hoge.png") のように叩くと、
+# UInt8Array でデータを取り出せます。ユーザーの操作に応じて通信ナシでjsから超高速ロードしたいUI部品などに使います。
+# ちなみに true のファイルの分だけアプリ最初の cli の Now Loading が長くなります。
+client-resource = false # default: false

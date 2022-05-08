@@ -2,27 +2,20 @@
 #[allow(dead_code)]
 fn main()
 {
- #[cfg(not(feature = "deprecated"))]
- use build_pretty::BUILD_TYPE_STRING;
  use build_pretty::{
   build_pretty,
-  CommandBuilder
+  CommandBuilder,
+  BUILD_TYPE_STRING
  };
  use const_format::concatcp;
 
- #[cfg(not(feature = "deprecated"))]
  const PUB_PATH: &str = concatcp!("pub.", BUILD_TYPE_STRING);
- #[cfg(feature = "deprecated")]
- const PUB_PATH: &str = "pub.__deprecated__";
 
  const RESOUCE_INCLUDABLE_PATH: &str = ".build/resource.includable.rs";
  const BUILD_PUB_COMMAND: &str = "cargo";
  const BUILD_PUB_CARGO_COMMAND: &str = "make";
 
- #[cfg(not(feature = "deprecated"))]
  const BUILD_PUB_CARGO_MAKE_COMMAND: &str = concatcp!("build-", BUILD_TYPE_STRING, "-pub");
- #[cfg(feature = "deprecated")]
- const BUILD_PUB_CARGO_MAKE_COMMAND: &str = "build-deprecated-pub";
 
  const BUILD_PUB_ARGS: &[&str] = &[BUILD_PUB_CARGO_COMMAND, BUILD_PUB_CARGO_MAKE_COMMAND];
 
@@ -48,7 +41,7 @@ fn main()
    {
     Ok(path) if path.is_file() => {
      let path = path.strip_prefix(PUB_PATH)?;
-     entries.push(format!("(\"{p}\",include_bytes!(\"../{PUB_PATH}/{p}\").as_slice())", p=path.display()));
+     entries.push(format!("(\"{p}\".to_string(),include_bytes!(\"../{PUB_PATH}/{p}\").to_vec())", p=path.display()));
      output.write_fmt(format_args!("uis.lib ⬅ {:?}\n", path.display()))?
     },
     Err(e) => eprintln!("{:?}", e),

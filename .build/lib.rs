@@ -5,8 +5,8 @@ include!("build.rs");
 use once_cell::sync::Lazy;
 use std::collections::HashMap;
 
-pub type KeyType = &'static str;
-pub type ValueType = &'static [u8];
+pub type KeyType = String;
+pub type ValueType = Vec<u8>;
 pub type DictionaryType = HashMap<KeyType, ValueType>;
 pub type LazyDictionaryType = Lazy<DictionaryType>;
 
@@ -21,7 +21,7 @@ fn __()
 {
  use crate::RESOURCE;
  println!("len={}", RESOURCE.len());
- for (&key, &value) in RESOURCE.iter()
+ for (key, value) in RESOURCE.iter()
  {
   let top20 = &value[..20.min(value.len())];
   println!("{key}; {bytes:?} => {top20:?}", bytes = value.len());

@@ -29,9 +29,6 @@ fn main()
  const TASK_BUILD_PUB: &str = concatcp!("src ➟ ", PUB_PATH);
  const TASK_COLLECT_PUB: &str = concatcp!(PUB_PATH, " ➟ ", RESOUCE_INCLUDABLE_PATH);
 
- // const RESOURCE_INCLUDABLE_HEADER: &str = "fn include_resource() -> DictionaryType { ";
- // const RESOURCE_INCLUDABLE_FOOTER: &str = " }";
-
  // 1. src -> PUB_PATH への uis 本体のビルドプロセスを実行
  build_pretty!().enque_command(
   TASK_BUILD_PUB,
